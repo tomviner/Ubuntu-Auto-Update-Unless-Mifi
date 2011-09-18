@@ -9,12 +9,12 @@ This script checks the SSID found in `iwconfig` and exits if it matches my mifi 
 Usage
 -----
     
-update.py takes an options list of ssids to ignore:
+update.py takes an optional list of SSIDs to ignore:
 
     python update.py CappedAndroidMifiSSID StingySteve DodgyDave
 
-I add this script as a sudo cron job with: `sudo crontab -e` then 
+I add this script as a sudo cron job with: `sudo crontab -e` then enter
 
     0 /4 * * * python /path/to/update.py Tom
 
-which will run every 4 hours.
+which will run every 4 hours. Adjust as required.
