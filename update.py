@@ -1,10 +1,14 @@
+"""
+Update packages unless tethered via bandwidth capped personal mobile hotspot
+"""
+
 import os
 import sys
 import subprocess
 
-"""
-Update packages unless tethered via bandwidth capped personal mobile hotspot
-"""
+
+IWCONFIG_PATH = '/sbin/iwconfig'
+
 
 def do(cmd, debug=False):
     if debug:
@@ -14,7 +18,13 @@ def do(cmd, debug=False):
     assert status_code==0, 'Status code: %s' % status_code
 
 def on_mifi(bad_ssids=()):
-    conn_data = subprocess.Popen('iwconfig', stdout=subprocess.PIPE).communicate()[0]
+    try:
+        p = subprocess.Popen(IWCONFIG_PATH, stdout=subprocess.PIPE)
+    except OSError, e:
+        print "Problem calling iwconfig at %s: %r" % (IWCONFIG_PATH, e)
+        return False
+    comms = p.communicate()
+    conn_data = comms[0]
     return any(('ESSID:"%s"' % ssid) in conn_data for ssid in bad_ssids)
 
 def upgrade_packages(debug=False):
