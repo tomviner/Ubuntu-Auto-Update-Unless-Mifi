@@ -39,9 +39,11 @@ def upgrade_packages(debug=False):
         do(cmd, debug=True)
 
 def main():
-    bad_ssids = ()
-    if sys.argv[1:]:
-        bad_ssids = sys.argv[1:]
+    """
+    TODO: Exit if update has been run successfully too recently
+        eg by checking time on /home/tom/dev/update/log.txt
+    """
+    bad_ssids = sys.argv[1:]
     if on_mifi(bad_ssids):
         print "On personal mobile hotspot so don't update"
         sys.exit()
