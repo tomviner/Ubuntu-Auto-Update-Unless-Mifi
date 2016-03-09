@@ -5,6 +5,7 @@ Update packages unless tethered via bandwidth capped personal mobile hotspot
 import os
 import sys
 import subprocess
+import time
 
 
 IWCONFIG_PATH = '/sbin/iwconfig'
@@ -50,4 +51,5 @@ def main():
     upgrade_packages(debug=True)
 
 if __name__ == '__main__':
+    print time.asctime()
     main()
