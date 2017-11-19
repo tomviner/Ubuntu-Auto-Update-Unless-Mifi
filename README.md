@@ -15,6 +15,6 @@ update.py takes an optional list of SSIDs to ignore:
 
 I add this script as a sudo cron job with: `sudo crontab -e` then enter
 
-    0 /4 * * * python /path/to/update.py Tom
+    0 */4 * * * python /path/to/update.py Tom
 
 which will run every 4 hours. Adjust as required.
